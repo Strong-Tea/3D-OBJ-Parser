@@ -20,7 +20,8 @@ DisplayWindow::~DisplayWindow()
 }
 
 
-void DisplayWindow::DrawDDALine(int x1, int y1, int x2, int y2, float z1, float z2) {
+void DisplayWindow::DrawDDALine(int x1, int y1, int x2, int y2, float z1, float z2, vec3d& averageNormal, vec3d& lightDirection, vec3d& viewerDirection) {
+    float ambient = 0.2f;
     int dx = x2 - x1;
     int dy = y2 - y1;
     int steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
@@ -37,12 +38,12 @@ void DisplayWindow::DrawDDALine(int x1, int y1, int x2, int y2, float z1, float 
 
         if (ix >= 0 && ix < width && iy >= 0 && iy < height) {
             int index = (iy * width + ix) * PIXEL_SIZE_BYTES;
-
+            float intensity = mat4x4::FlatShading(averageNormal, lightDirection, viewerDirection, ambient);
             if (z < zBuffer[iy * width + ix]) {
-                pixelBuffer[index] = 48;       // R
-                pixelBuffer[index + 1] = 255;  // G
-                pixelBuffer[index + 2] = 55;   // B
-                pixelBuffer[index + 3] = 255;  // A (Alpha)
+                pixelBuffer[index] = 48 * intensity;       // R
+                pixelBuffer[index + 1] = 255 * intensity;  // G
+                pixelBuffer[index + 2] = 55 * intensity;   // B
+                pixelBuffer[index + 3] = 255;              // A (Alpha)
                 zBuffer[iy * width + ix] = z;
             }
         }
@@ -53,8 +54,6 @@ void DisplayWindow::DrawDDALine(int x1, int y1, int x2, int y2, float z1, float 
     }
 }
 
-
-
 void DisplayWindow::drawObjModel(Object3D& obj3D, float fElapsedTime)
 {
     std::fill(pixelBuffer, pixelBuffer + width * height * PIXEL_SIZE_BYTES, 0);  // Initialize to black
@@ -62,6 +61,7 @@ void DisplayWindow::drawObjModel(Object3D& obj3D, float fElapsedTime)
     vec3d cameraPosition = { 0.f, 0.f, 100.0f, 1.0f };
     vec3d cameraTarget = { 0, 0.f, 0.f, 1.f };
     vec3d cameraUp = { 0.f, 1.f, 0.f, 1.f };
+    vec3d lightDirection = { 1.0f, 1.0f, 1.0f, 1.0f };
 
     // Create Matrices   
     mat4x4 matRotate = mat4x4::MatrixMakeRotation(obj3D.rotateX, obj3D.rotateY, obj3D.rotateZ);
@@ -170,7 +170,7 @@ void DisplayWindow::drawObjModel(Object3D& obj3D, float fElapsedTime)
                 cross_x1 = x0 + dx1 * (top_y - y0) / dy1;
                 cross_x2 = x0 + dx2 * (top_y - y0) / dy2;
 
-                DrawDDALine(cross_x1, top_y, cross_x2, top_y, z0, z1);
+                DrawDDALine(cross_x1, top_y, cross_x2, top_y, z0, z1, averageNormal, lightDirection, cameraPosition);
                 top_y++;
             }
 
@@ -180,7 +180,7 @@ void DisplayWindow::drawObjModel(Object3D& obj3D, float fElapsedTime)
                 cross_x1 = x1 + dx1 * (top_y - y1) / dy1;
                 cross_x2 = x0 + dx2 * (top_y - y0) / dy2;
 
-                DrawDDALine(cross_x1, top_y, cross_x2, top_y, z1, z2);
+                DrawDDALine(cross_x1, top_y, cross_x2, top_y, z1, z2, averageNormal, lightDirection, cameraPosition);
                 top_y++;
             }
         }
@@ -203,14 +203,6 @@ void DisplayWindow::resetZBuffer()
     }
 }
 
-void DisplayWindow::fillTriangle(const Point& p1, const Point& p2, const Point& p3)
-{
-
-}
-
-void DisplayWindow::DrawFilledTriangle(int x1, int y1, int x2, int y2, int x3, int y3)
-{
-}
 
 void DisplayWindow::drawDislayInfo()
 {
@@ -236,18 +228,6 @@ void DisplayWindow::drawDislayInfo()
     for (int i = 0; i < 3; i++) {
         window.draw(texts[i]);
     }
-}
-
-std::vector<int> DisplayWindow::findIntersections(const Point& p1, const Point& p2, int y)
-{
-    std::vector<int> intersections;
-    if ((p1.y <= y && p2.y >= y) || (p1.y >= y && p2.y <= y)) {
-        if (p1.y != p2.y) {
-            int x = p1.x + (y - p1.y) * (p2.x - p1.x) / (p2.y - p1.y);
-            intersections.push_back(x);
-        }
-    }
-    return intersections;
 }
 
 
@@ -320,4 +300,3 @@ void DisplayWindow::Render(Object3D& obj3D) {
         window.display();
     }
 }
-
