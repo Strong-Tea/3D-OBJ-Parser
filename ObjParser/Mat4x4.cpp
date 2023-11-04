@@ -1,4 +1,5 @@
 #include "Mat4x4.h"
+#include <iostream>
 
 
 mat4x4 mat4x4::operator*(const mat4x4& other) const
@@ -18,7 +19,7 @@ vec3d mat4x4::MatrixMultiplyByVector(mat4x4& m, vec3d& i)
 	outVec.x = i.x * m.m[0][0] + i.y * m.m[1][0] + i.z * m.m[2][0] + m.m[3][0];
 	outVec.y = i.x * m.m[0][1] + i.y * m.m[1][1] + i.z * m.m[2][1] + m.m[3][1];
 	outVec.z = i.x * m.m[0][2] + i.y * m.m[1][2] + i.z * m.m[2][2] + m.m[3][2];
-	float w  = i.x * m.m[0][3] + i.y * m.m[1][3] + i.z * m.m[2][3] + m.m[3][3];
+	float w = i.x * m.m[0][3] + i.y * m.m[1][3] + i.z * m.m[2][3] + m.m[3][3];
 
 	if (w != 0.0f)
 	{
@@ -200,7 +201,7 @@ float mat4x4::Vector_Length(vec3d& v)
 
 vec3d mat4x4::Vector_Normalise(vec3d& v)
 {
-	
+
 	float length = std::sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 
 	if (length != 0.0f) {
@@ -236,4 +237,17 @@ mat4x4 mat4x4::Transposition(mat4x4& mat)
 	}
 
 	return result;
+}
+
+float mat4x4::Lambertian(vec3d& normal, vec3d& lightDirection) {
+	normal = mat4x4::Vector_Normalise(normal);
+	lightDirection = mat4x4::Vector_Normalise(lightDirection);
+	float dotProduct = mat4x4::Vector_DotProduct(normal, lightDirection);
+	return std::max(0.0f, dotProduct);
+}
+
+float mat4x4::FlatShading(vec3d& normal, vec3d& lightDirection, vec3d& viewerDirection, float ambient) {
+	float lambertian = Lambertian(normal, lightDirection);
+	float intensity = ambient + (1.0f - ambient) * lambertian;
+	return intensity;
 }
