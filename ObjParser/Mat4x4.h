@@ -34,5 +34,7 @@ public:
 	static vec3d Vector_CrossProduct(vec3d& v1, vec3d& v2);
 	static float Vector_DotProduct(vec3d& v1, vec3d& v2);
 	static float Vector_Length(vec3d& v);
+	static float Lambertian(vec3d& normal, vec3d& lightDirection);
+	static float FlatShading(vec3d& normal, vec3d& lightDirection, vec3d& viewerDirection, float ambient);
 };
 
