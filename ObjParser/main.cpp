@@ -2,17 +2,17 @@
 #include "Parser.h"
 #include "Object3D.h"
 #include <iostream>
-#include <chrono>
 
-int main()
-{   
-    std::string path = "../resources//hollowknight.obj";
+
+int main() {   
+
+    std::string path = "E:\\BSUIR\\c++\\ParserPreviusVersion - Copy\\resources\\plain2.obj";
 
     Object3D object3D;
-    Parser::ParseObjFile(path, object3D);
+    Parser::parseObjFile(path, object3D);
 
     DisplayWindow window(1080, 720);
-    window.Render(object3D);
+    window.render(object3D);
 
     return 0;
 }

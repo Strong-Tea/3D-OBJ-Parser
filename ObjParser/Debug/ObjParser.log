@@ -1,19 +1,33 @@
-﻿  DisplayWindow.cpp
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(64,91): warning C4305: 'argument': truncation from 'double' to 'float'
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(103,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(104,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(105,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(107,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(108,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(109,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(111,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(112,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(113,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(168,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(169,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(181,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(182,27): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(303,73): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+﻿  3DGeometry.cpp
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\3DGeometry.cpp(79,57): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\3DGeometry.cpp(105,27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\3DGeometry.cpp(178,10): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\3DGeometry.cpp(193,46): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\3DGeometry.cpp(438,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\3DGeometry.cpp(440,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\3DGeometry.cpp(441,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\3DGeometry.cpp(442,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Camera.cpp
+  DisplayWindow.cpp
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(63,33): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(63,33): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(63,37): warning C4838: conversion from 'int' to 'float' requires a narrowing conversion
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(63,37): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(74,77): warning C4838: conversion from 'sf::Uint8' to 'float' requires a narrowing conversion
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(75,51): warning C4838: conversion from 'sf::Uint8' to 'float' requires a narrowing conversion
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(76,51): warning C4838: conversion from 'sf::Uint8' to 'float' requires a narrowing conversion
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(106,79): warning C4838: conversion from 'sf::Uint8' to 'float' requires a narrowing conversion
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(107,52): warning C4838: conversion from 'sf::Uint8' to 'float' requires a narrowing conversion
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(108,52): warning C4838: conversion from 'sf::Uint8' to 'float' requires a narrowing conversion
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(159,65): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(205,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(206,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(209,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(210,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(213,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(214,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(407,43): warning C4305: 'argument': truncation from 'double' to 'float'
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(522,69): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -22,7 +36,7 @@ E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(303,73): wa
           [
               T=float
           ]
-E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(303,62): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(522,58): warning C4244: 'argument': conversion from 'T' to 'T', possible loss of data
           with
           [
               T=unsigned int
@@ -31,7 +45,14 @@ E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\DisplayWindow.cpp(303,62): wa
           [
               T=float
           ]
-  main.cpp
+  Object3D.cpp
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\Object3D.cpp(22,29): warning C4018: '<': signed/unsigned mismatch
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\Object3D.cpp(29,54): warning C4018: '<': signed/unsigned mismatch
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\Object3D.cpp(43,55): warning C4018: '<': signed/unsigned mismatch
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\Object3D.cpp(54,55): warning C4018: '<': signed/unsigned mismatch
+  Parser.cpp
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\Parser.cpp(43,20): warning C4018: '<': signed/unsigned mismatch
+E:\BSUIR\c++\ParserPreviusVersion - Copy\ObjParser\Parser.cpp(56,20): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
 sfml-graphics-s-d.lib(BlendMode.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(BlendMode.obj)' or at ''; linking object as if no debug info
 sfml-graphics-s-d.lib(Color.obj) : warning LNK4099: PDB '' was not found with 'sfml-graphics-s-d.lib(Color.obj)' or at ''; linking object as if no debug info

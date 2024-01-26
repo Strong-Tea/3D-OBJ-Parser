@@ -1,14 +1,10 @@
 #pragma once
 #include <vector>
-#include "ObjData.h"
+#include "3DGeometry.h"
 
-#define OFFSET_X 0.5f
-#define OFFSET_Y 0.5f
-#define OFFSET_Z 0.5f
-
-#define ROTATE_X 0.1f
-#define ROTATE_Y 0.1f
-#define ROTATE_Z 0.1f
+#define SPEED_MOVE   20
+#define SPEED_ROTATE 5
+#define SPEED_MOVE_LIGHT 5
 
 
 class Object3D {
@@ -17,25 +13,24 @@ public:
 	float rotateY = 0.f;
 	float rotateZ = 0.f;
 
-	float scaleX = 3.3f;
-	float scaleY = 3.3f;
-	float scaleZ = 3.3f;
+	float scaleX = 5.0f;
+	float scaleY = 5.0f;
+	float scaleZ = 5.0f;
 
 	float offsetX = 0.f;
 	float offsetY = 0.f;
 	float offsetZ = 0.f;
 
-	float fov;
-	float near;
-	float far;
-
-	std::vector<vec3d> vertices;
-	std::vector<vec3d> normals;
-	std::vector<vec2d> textures;
+	std::vector<vec3d>    vertices;
+	std::vector<vec3d>    normals;
+	std::vector<vec3d>    textures;
 	std::vector<triangle> triangles;
 
 	void AddVertexGeometric(vec3d &v);
-	void AddVertexTexture(vec2d &vt);
+	void AddVertexTexture(vec3d &vt);
 	void AddVertexNormal(vec3d &vn);
 	void AddTriangle(const std::vector<int>& vertexIndices);
+
+	float lambertLighting(vec3d& normal, vec3d& lightDirection);
+	float flatShading(vec3d& normal, vec3d& lightDirection, vec3d& viewerDirection, float ambient);
 };

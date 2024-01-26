@@ -2,10 +2,10 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include "ObjData.h"
+#include "3DGeometry.h"
 
 
-void Parser::ParseObjFile(std::string& path, Object3D& object3D) {
+void Parser::parseObjFile(std::string& path, Object3D& object3D) {
 	std::ifstream file(path);
 	if (file.is_open()) {
 		std::string line;
@@ -19,16 +19,16 @@ void Parser::ParseObjFile(std::string& path, Object3D& object3D) {
 				continue;
 			}
 			else if (line[0] == 'v' && line[1] == 'n') {		// texture
-				ProcessNormal(line, object3D);
+				processNormal(line, object3D);
 			}
 			else if (line[0] == 'v' && line[1] == 't') {		// normal
-				ProcessTexture(line, object3D);
+				processTexture(line, object3D);
 			}
 			else if (line[0] == 'v') {							// vertex
-				ProcessVertex(line, object3D);
+				processVertex(line, object3D);
 			}
 			else if (line[0] == 'f') {							// face
-				ProcessFace(line, object3D);
+				processFace(line, object3D);
 			}
 		}
 		file.close();
@@ -39,7 +39,7 @@ void Parser::ParseObjFile(std::string& path, Object3D& object3D) {
 }
 
 
-int Parser::SkipWhiteSpace(std::string& str, int startIndex) {
+int Parser::skipWhiteSpace(std::string& str, int startIndex) {
 	while (startIndex < str.length()) {
 		if (str[startIndex] == ' ' || str[startIndex] == '\n' || str[startIndex] == '\t') {
 			startIndex++;
@@ -52,7 +52,7 @@ int Parser::SkipWhiteSpace(std::string& str, int startIndex) {
 }
 
 
-int Parser::FindFirstWhiteSpace(std::string& str, int startIndex) {
+int Parser::findFirstWhiteSpace(std::string& str, int startIndex) {
 	while (startIndex < str.length()) {
 		if (str[startIndex] != ' ' && str[startIndex] != '\n' && str[startIndex] != '\t') {
 			startIndex++;
@@ -65,14 +65,14 @@ int Parser::FindFirstWhiteSpace(std::string& str, int startIndex) {
 }
 
 
-void Parser::ParseStringList(std::string& str, int startIndex, std::vector<std::string>& buffer) {
+void Parser::parseStringList(std::string& str, int startIndex, std::vector<std::string>& buffer) {
 	int strLength = str.length();
 	while (startIndex < strLength) {
-		startIndex = SkipWhiteSpace(str, startIndex);
+		startIndex = skipWhiteSpace(str, startIndex);
 		if (startIndex >= strLength) {
 			break;
 		}
-		int endIndex = FindFirstWhiteSpace(str, startIndex);
+		int endIndex = findFirstWhiteSpace(str, startIndex);
 		buffer.push_back(str.substr(startIndex, endIndex - startIndex));
 		startIndex = endIndex;
 	}
@@ -80,15 +80,23 @@ void Parser::ParseStringList(std::string& str, int startIndex, std::vector<std::
 
 
 std::string& Parser::ltrim(std::string& s) {
-	s.erase(s.begin(), std::find_if(s.begin(), s.end(),
-		std::not1(std::ptr_fun<int, int>(std::isspace))));
+	//s.erase(s.begin(), std::find_if(s.begin(), s.end(),
+	//	std::not1(std::ptr_fun<int, int>(std::isspace))));
+	//return s;
+
+
+
+	s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int c) {return !std::isspace(c); }));
 	return s;
 }
 
 
 std::string& Parser::rtrim(std::string& s) {
-	s.erase(std::find_if(s.rbegin(), s.rend(),
-		std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+	//s.erase(std::find_if(s.rbegin(), s.rend(),
+	//	std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
+	//return s;
+
+	s.erase(std::find_if(s.rbegin(), s.rend(), [](int c) { return !std::isspace(c); }).base(), s.end());
 	return s;
 }
 
@@ -98,46 +106,46 @@ std::string& Parser::trim(std::string& s) {
 }
 
 
-void Parser::ParseFloatList(int numFloats, std::string str, int startIndex, float* fbuffer) {
+void Parser::parseFloatList(int numFloats, std::string str, int startIndex, float* fbuffer) {
 	int parseIndex = 0;
 	int strLength = str.length();
 
 	while (startIndex < strLength) {
-		startIndex = SkipWhiteSpace(str, startIndex);
+		startIndex = skipWhiteSpace(str, startIndex);
 		if (startIndex >= strLength || parseIndex == numFloats) {
 			break;
 		}
-		int endIndex = FindFirstWhiteSpace(str, startIndex);
+		int endIndex = findFirstWhiteSpace(str, startIndex);
 		fbuffer[parseIndex++] = std::stof(str.substr(startIndex, endIndex));
 		startIndex = endIndex;
 	}
 }
 
 
-void Parser::ProcessVertex(std::string& line, Object3D& object3DBuffer) {
+void Parser::processVertex(std::string& line, Object3D& object3DBuffer) {
 	float values[3];
-	ParseFloatList(3, line, 1, values);
+	parseFloatList(3, line, 1, values);
 	vec3d vertex = { values[0], values[1], values[2] };
 	object3DBuffer.AddVertexGeometric(vertex);
 }
 
 
-void Parser::ProcessNormal(std::string& line, Object3D& object3DBuffer) {
+void Parser::processNormal(std::string& line, Object3D& object3DBuffer) {
 	float values[3];
-	ParseFloatList(3, line, 2, values);
+	parseFloatList(3, line, 2, values);
 	vec3d normal = { values[0], values[1], values[2] };
 	object3DBuffer.AddVertexNormal(normal);
 }
 
 
-void Parser::ProcessTexture(std::string& line, Object3D& object3DBuffer) {
+void Parser::processTexture(std::string& line, Object3D& object3DBuffer) {
 	float values[2];
-	ParseFloatList(2, line, 2, values);
-	vec2d texture = { values[0], values[1] };
+	parseFloatList(2, line, 2, values);
+	vec3d texture = { values[0], values[1] };
 	object3DBuffer.AddVertexTexture(texture);
 }
 
-std::vector<std::vector<int>> Parser::SplitPolygonToTriangles(const std::vector<int>& polygonIndices) {
+std::vector<std::vector<int>> Parser::splitPolygonToTriangles(const std::vector<int>& polygonIndices) {
 	std::vector<std::vector<int>> triangles;
 
 	/*WRITE ALGORITHM*/
@@ -146,10 +154,10 @@ std::vector<std::vector<int>> Parser::SplitPolygonToTriangles(const std::vector<
 }
 
 
-void Parser::ProcessFace(std::string& line, Object3D& object3DBuffer) {
+void Parser::processFace(std::string& line, Object3D& object3DBuffer) {
 	std::vector<std::string> strIndexFaceVertex;
 	std::vector<int> vertexIndices;
-	ParseStringList(line, 1, strIndexFaceVertex);
+	parseStringList(line, 1, strIndexFaceVertex);
 
 	for (std::string fv : strIndexFaceVertex) {
 		

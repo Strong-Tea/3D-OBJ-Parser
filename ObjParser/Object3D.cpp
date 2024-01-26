@@ -7,7 +7,7 @@ void Object3D::AddVertexGeometric(vec3d& v) {
 	vertices.push_back(v);
 }
 
-void Object3D::AddVertexTexture(vec2d& vt) {
+void Object3D::AddVertexTexture(vec3d& vt) {
 	textures.push_back(vt);
 }
 
@@ -59,3 +59,18 @@ void Object3D::AddTriangle(const std::vector<int> &vertexIndices) {
 	}
 	triangles.push_back(tri);
 }
+
+float Object3D::lambertLighting(vec3d& normal, vec3d& lightDirection) {
+	normal = vec3d::vectorNormalise(normal);
+	lightDirection = vec3d::vectorNormalise(lightDirection);
+	float dotProduct = vec3d::vectorDotProduct(normal, lightDirection);
+	return std::max(0.0f, dotProduct);
+}
+
+float Object3D::flatShading(vec3d& normal, vec3d& lightDirection, vec3d& viewerDirection, float ambient) {
+	float lambertian = lambertLighting(normal, lightDirection);
+	float intensity = ambient + (1.0f - ambient) * lambertian;
+	return intensity;
+}
+
+
